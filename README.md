@@ -6,10 +6,11 @@ Downloads and splits audio tracks from a YouTube video according to the chapters
 Useful for compilations or full album uploads.
 
 This fork uses **yt-dlp** instead of youtube-dl and also gives mp3 with better quality (256kbps; VBR).
+This fork of a fork also gives m4a with average quality (7) and tries to embed more tags into music file (genre, date, album artist, disc number).
 
 ## Requirements
 
-`yt-dlp` and `ffmpeg` installed and in your `PATH`.
+`yt-dlp` and `ffmpeg` installed and added their locations to your `PATH`.
 
 ## Install
 
