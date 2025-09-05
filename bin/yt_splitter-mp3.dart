@@ -53,7 +53,7 @@ void main(List<String> arguments) async {
         '--audio-format',
         'mp3',
         '--audio-quality',
-        '6',
+        '0',
         '--output',
         'output.%(ext)s',
         'https://www.youtube.com/watch?v=$videoId'
