@@ -8,14 +8,14 @@ jobs:
 
     strategy:
       matrix:
-#        os: [ubuntu-latest, windows-latest]
+#       os: [ubuntu-latest, windows-latest]
         os: [windows-latest]
         sdk: [2.12.0]
         include:
- #         - os: ubuntu-latest
- #           output-name: yt-splitter-linux
+#          - os: ubuntu-latest
+#            output-name: yt-splitter-linux
           - os: windows-latest
-            output-name: yt-splitter-windows.exe
+#            output-name: yt-splitter-windows.exe
 
     steps:
       - uses: actions/checkout@v4
@@ -24,8 +24,10 @@ jobs:
           sdk: ${{ matrix.sdk }}
       - run: mkdir build
       - run: dart pub get
-      - run: dart compile exe bin/yt_splitter.dart -v -o build/${{ matrix.output-name }}
+#     - run: dart compile exe bin/yt_splitter.dart -v -o build/${{ matrix.output-name }}
+      - run: dart compile exe bin/yt_splitter-m4a.dart -v -o build/yt-splitter-windows-m4a.exe
+      - run: dart compile exe bin/yt_splitter-mp3.dart -v -o build/yt-splitter-windows-mp3.exe
       - uses: actions/upload-artifact@v4
         with:
-          name: native-executables
+          name: yt-splitter
           path: build
