@@ -33,11 +33,11 @@ void main(List<String> arguments) async {
 
   Directory(path).createSync(recursive: true);
 
-  final mp3FilePath = join(path, 'output.mp3');
+  final m4aFilePath = join(path, 'output.m4a');
   final jsonFilePath = join(path, 'output.info.json');
   // final thumbnailFilePath = join(path, 'output.jpg');
 
-  if (!File(mp3FilePath).existsSync()) {
+  if (!File(m4aFilePath).existsSync()) {
     print('Downloading and converting audio file from YouTube...');
     final process = await Process.start(
       'yt-dlp',
@@ -51,9 +51,9 @@ void main(List<String> arguments) async {
         'bestaudio',
         '--extract-audio',
         '--audio-format',
-        'mp3',
+        'm4a',
         '--audio-quality',
-        '0',
+        '7',
         '--output',
         'output.%(ext)s',
         'https://www.youtube.com/watch?v=$videoId'
@@ -105,7 +105,7 @@ void main(List<String> arguments) async {
 
   int tracknumber = 0;
 
-  print('Splitting mp3 file...');
+  print('Splitting m4a file...');
 
   final alreadySeenTitles = <String>[];
 
@@ -149,7 +149,7 @@ void main(List<String> arguments) async {
 
     final res = await Process.run('ffmpeg', [
       '-i',
-      mp3FilePath,
+      m4aFilePath,
       // ...thumbnailFlags,
       '-vn',
       '-acodec',
@@ -163,14 +163,18 @@ void main(List<String> arguments) async {
       '-metadata',
       'album=$album',
       '-metadata',
+      'composer=$composer',
+      '-metadata',
+      'genre=$genre', 
+      '-metadata',
       'artist=$artist',
       '-metadata',
       'track=$tracknumber',
       '-y',
-      'file:' + join(outputDirectoryPath, '$chapterTitle.mp3'),
+      'file:' + join(outputDirectoryPath, '$chapterTitle.m4a'),
     ]);
     if (res.exitCode != 0) {
-      print('Error while converting mp3 file:');
+      print('Error while converting m4a file:');
       print(res.stdout);
       print(res.stderr);
     }
