@@ -10,6 +10,7 @@ jobs:
       matrix:
 #        os: [ubuntu-latest, windows-latest]
         os: [windows-latest]
+        sdk: [3.1, stable, beta]
         include:
  #         - os: ubuntu-latest
  #           output-name: yt-splitter-linux
@@ -17,8 +18,10 @@ jobs:
             output-name: yt-splitter-windows.exe
 
     steps:
-      - uses: actions/checkout@v3
-      - uses: DanTup/gh-actions/setup-dart@master
+      - uses: actions/checkout@v4
+      - uses: dart-lang/setup-dart@v1
+        with:
+          sdk: ${{ matrix.sdk }}
       - run: mkdir build
       - run: dart pub get
       - run: dart compile exe bin/yt_splitter.dart -v -o build/${{ matrix.output-name }}
