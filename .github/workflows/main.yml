@@ -22,7 +22,7 @@ jobs:
       - run: mkdir build
       - run: dart pub get
       - run: dart compile exe bin/yt_splitter.dart -v -o build/${{ matrix.output-name }}
-      - uses: actions/upload-artifact@v1
+      - uses: actions/upload-artifact@v4
         with:
           name: native-executables
           path: build
