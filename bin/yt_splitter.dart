@@ -88,7 +88,17 @@ void main(List<String> arguments) async {
 
   final album = stripUnsafeCharacters(data['title']);
 
-  final artist = data['artist'] ?? data['uploader'] ?? '';
+  final genre = data['genre'] ?? data['genres'] ?? '';
+
+  final composer = data['composer'] ?? data['composers'] ?? '';
+
+  final disc_number = data['disc_number'] ?? '';
+
+  final date = data['release_year'] ?? data['release_date'] ?? data['upload_date'] ?? '';
+
+  final album_artist = data['album_artist'] ?? data['album_artists'] ?? '';
+
+  final artist = data['artist'] ?? data['artists'] ?? data['uploader'] ?? '';
 
   if ((data['chapters'] ?? []).isEmpty) {
     stderr.writeln(
@@ -165,7 +175,13 @@ void main(List<String> arguments) async {
       '-metadata',
       'composer=$composer',
       '-metadata',
-      'genre=$genre', 
+      'genre=$genre',
+      '-metadata',
+      'disc=$disc_number', 
+      '-metadata',
+      'album_artist=$album_artist', 
+      '-metadata',
+      'date=$date', 
       '-metadata',
       'artist=$artist',
       '-metadata',
